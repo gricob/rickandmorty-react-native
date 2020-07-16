@@ -1,5 +1,7 @@
 import React from 'react';
-import { SafeAreaView, Text, FlatList, RefreshControl } from 'react-native';
+import { SafeAreaView, FlatList, RefreshControl } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { CharacterCard } from '../../molecules';
 import PropTypes from 'prop-types';
 import styles from './styles';
 
@@ -10,11 +12,15 @@ class Characters extends React.Component {
   }
 
   _onEndReached = ({distanceFromEnd}) => {
-    console.log('endReached');
     const {page, pages, loading} = this.props;
+    
     if (!loading && page < pages) {
       this.props.fetchNextCharactersPage();
     }
+  };
+
+  _onCharacterPress = (character) => {
+    Actions.push('character', { character, title: character.name });
   };
 
 
@@ -27,7 +33,7 @@ class Characters extends React.Component {
           data={list}
           keyExtractor={(item, index) => `character-${item.id}`}
           renderItem={({item}) => (
-            <Text>{ item.name }</Text>
+            <CharacterCard character={ item } onPress={(character) => this._onCharacterPress(character)}/>
           )}
           onEndReached={this._onEndReached}
           onEndReachedThreshold={0.8}
@@ -52,7 +58,8 @@ Characters.propTypes = {
   fetchNextCharactersPage: PropTypes.func,
   loading: PropTypes.bool,
   list: PropTypes.arrayOf(PropTypes.object),
-  total: PropTypes.number,
+  page: PropTypes.number,
+  pages: PropTypes.number,
 }
 
 export default Characters;
