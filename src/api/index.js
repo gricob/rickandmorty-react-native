@@ -10,11 +10,12 @@ const instance = axios.create({
 });
 
 export const getCharacters = (params) => {
-  const url = `/characters?${qs.stringify(params, {skipNulls: true})}`;
+  const url = `/character/?${qs.stringify(params, {skipNulls: true})}`;
+  console.log(url);
   return instance.get(url);
 }
 
 export const getCharacter = (id) => {
-  const url = `/characters/${id}`;
+  const url = `/character/${id}`;
   return instence.get(url);
 }
