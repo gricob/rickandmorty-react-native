@@ -31,7 +31,7 @@ class Characters extends React.Component {
       <SafeAreaView style={styles.container}>
         <FlatList
           data={list}
-          keyExtractor={(item, index) => `character-${item.id}`}
+          keyExtractor={(item, index) => `character-${index}`}
           renderItem={({item}) => (
             <CharacterCard character={ item } onPress={(character) => this._onCharacterPress(character)}/>
           )}

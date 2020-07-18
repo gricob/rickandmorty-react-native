@@ -11,7 +11,6 @@ const instance = axios.create({
 
 export const getCharacters = (params) => {
   const url = `/character/?${qs.stringify(params, {skipNulls: true})}`;
-  console.log(url);
   return instance.get(url);
 }
 

@@ -1,4 +1,5 @@
 import Characters from './characters';
+import CharactersAdd from './character-add';
 import Character from './character';
 
-export {Characters, Character};
+export {Characters, CharactersAdd, Character};

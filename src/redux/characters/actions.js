@@ -75,10 +75,29 @@ export const fetchList = () => {
 
       dispatch(updateList(newList, total));
     } catch (e) {
-      Alert.alert('Error', e.message || 'Ha ocurrido un error');
+      Alert.alert('Error', e.message || 'Something went wrong!');
     } finally {
       dispatch(setLoading(false));
     }
   };
 };
+
+export const postCharacter = (character) => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch(setLoading(true));
+
+      const { list, pages } = getState().characters;
+
+      list.push(character);
+      
+      dispatch(updateList(list, pages));
+
+    } catch (e) {
+      Alert.alert('Error', e.message || 'Something went wrong!');
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
+}
 
